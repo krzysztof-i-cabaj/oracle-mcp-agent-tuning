@@ -61,4 +61,4 @@ This is not just "Text-to-SQL". It is a system where AI executes commands in a l
 
 This project was created to test the limits of current LLMs in database engineering tasks.
 
-[https://www.linkedin.com/in/krzysztof-cabaj-16b6a52/]
+https://www.linkedin.com/in/krzysztof-cabaj-16b6a52/
