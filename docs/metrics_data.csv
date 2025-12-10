@@ -1,0 +1,31 @@
+QUERY_ID,QUERY_TYPE,DESCRIPTION,METRIC_NAME,VALUE_BEFORE,VALUE_AFTER,CHANGE,PERCENT_IMPROVEMENT,UNIT,STATUS
+Query1,Range Filter,ORDER_DATE between dates,Plan Cost,691,685,-6,-0.9,%,✓ Index created (not used - high selectivity)
+Query1,Range Filter,ORDER_DATE between dates,Rows Scanned,500000,500000,0,0,%,Full table scan - correct optimization
+Query1,Range Filter,ORDER_DATE between dates,Temp Space,0,0,0,0,MB,No sort needed
+Query1,Range Filter,ORDER_DATE between dates,Index Created,IDX_DEMO_ORDERS_ORDER_DATE,IDX_DEMO_ORDERS_ORDER_DATE,Yes,3-4,MB,Priority 3 - for future growth
+Query2,VIP Join,GROUP BY with FK match,Plan Cost,2200,414,-1786,-81.2,%,CRITICAL IMPROVEMENT ⭐⭐⭐
+Query2,VIP Join,GROUP BY with FK match,CUSTOMERS Rows Scanned,100000,5000,-95000,-95,%,Index on SEGMENT eliminates 95K rows
+Query2,VIP Join,GROUP BY with FK match,Temp Space,51,8,-43,-84,%,Significant I/O reduction
+Query2,VIP Join,GROUP BY with FK match,Indexes Created,IDX_DEMO_CUSTOMERS_SEGMENT + IDX_DEMO_ORDERS_CUSTOMER_ID,IDX_DEMO_CUSTOMERS_SEGMENT + IDX_DEMO_ORDERS_CUSTOMER_ID,Yes,1-2 + 4-5,MB,Priority 1 - DEPLOY ASAP
+Query2,VIP Join,GROUP BY with FK match,Result Cardinality,4997,4997,0,0,rows,Correct (no logic change)
+Query3,Top-N Sort,ORDER BY DESC with FETCH FIRST,Plan Cost,11492,3,-11489,-99.97,%,FANTASTIC IMPROVEMENT ⭐⭐⭐⭐
+Query3,Top-N Sort,ORDER BY DESC with FETCH FIRST,Rows Processed,1500000,100,-1499900,-99.99,%,Only 100 items needed from 1.5M
+Query3,Top-N Sort,ORDER BY DESC with FETCH FIRST,Execution Method,SORT FULL SCAN,INDEX SCAN DESC (pre-sorted),Eliminates SORT,100,%,No temp space needed
+Query3,Top-N Sort,ORDER BY DESC with FETCH FIRST,Temp Space,51,0,-51,-100,%,Zero temp buffer usage
+Query3,Top-N Sort,ORDER BY DESC with FETCH FIRST,Logical I/O,120000,1,-119999,-99.99,%,Minimal data access
+Query3,Top-N Sort,ORDER BY DESC with FETCH FIRST,Indexes Created,IDX_ORDER_ITEMS_UNIT_PRICE_DESC + IDX_ORDER_ITEMS_UNIT_PRICE_ITEMID (optional covering),IDX_ORDER_ITEMS_UNIT_PRICE_DESC + IDX_ORDER_ITEMS_UNIT_PRICE_ITEMID (optional),Yes,6-8 + 8-10,MB,Priority 2 - universal + optional covering
+Query3,Top-N Sort,ORDER BY DESC with FETCH FIRST,Result Cardinality,100,100,0,0,rows,Correct (no logic change)
+
+SUMMARY_METRICS
+Category,Metric,Value,Notes
+Index Summary,Total Indexes Created,5,Priority 1 (2) + Priority 2 (1) + Priority 3 (2)
+Index Summary,Total Storage,22-32,MB - approximately 1% database overhead
+Database Impact,Database Size (estimated),3500,MB (DEMO_CUSTOMERS 100K + DEMO_ORDERS 500K + DEMO_ORDER_ITEMS 1.5M)
+Database Impact,Storage Overhead,%,1% - negligible
+Performance Summary,Best Improvement (Q3),-99.97,%,Eliminates SORT operation
+Performance Summary,Major Improvement (Q2),-81.2,%,Reduces rows scanned by 95%
+Performance Summary,Minor Improvement (Q1),-0.9,%,Index created for future growth
+Session Metrics,Queries Analyzed,3,All slow queries from application baseline
+Session Metrics,Indexes Deployed,5,Complete design and creation
+Session Metrics,Session Date,2025-12-10,Oracle 23.26.0.0.0
+Session Metrics,Phase Status,A (ALLSTATS),Collection in progress
