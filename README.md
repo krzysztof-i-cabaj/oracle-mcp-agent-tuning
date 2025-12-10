@@ -12,10 +12,10 @@ The Agent was given full database access and a single high-level command: *"Find
 
 The Agent autonomously generated the following reports as proof of work. These are hosted directly from this repository:
 
-### 🚀 [VIEW FULL TECHNICAL REPORT (HTML)](https://[YOUR-USERNAME].github.io/[REPO-NAME]/optimization_report.html)
+### 🚀 [VIEW FULL TECHNICAL REPORT (HTML)](https://krzysztof-i-cabaj.github.io/oracle-mcp-agent-tuning/optimization_report.html)
 *Interactive dashboard with Chart.js visualizations showing "Before" and "After" analysis.*
 
-### 📄 [VIEW EXECUTIVE SUMMARY (HTML)](https://[YOUR-USERNAME].github.io/[REPO-NAME]/executive_summary.html)
+### 📄 [VIEW EXECUTIVE SUMMARY (HTML)](https://krzysztof-i-cabaj.github.io/oracle-mcp-agent-tuning/executive_summary.html)
 *Business-ready version of the report, formatted for print/PDF export.*
 
 ---
