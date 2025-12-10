@@ -2,7 +2,7 @@
 
 > **Experiment:** Can AI autonomously diagnose, fix, and report performance issues in an Oracle Database?
 
-This project demonstrates a true **Agentic Workflow**, where an AI model (Claude 3.5 Sonnet) is connected to an **Oracle Database 23ai** instance via the **Model Context Protocol (MCP)** and **SQLcl**.
+This project demonstrates a true **Agentic Workflow**, where an AI model (Claude Haiku 4.5/) is connected to an **Oracle Database 26ai** instance via the **Model Context Protocol (MCP)** and **SQLcl**.
 
 The Agent was given full database access and a single high-level command: *"Find slow queries and fix them."* I did not manually write a single line of remedial SQL code.
 
